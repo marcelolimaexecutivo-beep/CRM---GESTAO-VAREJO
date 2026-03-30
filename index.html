@@ -1097,9 +1097,9 @@ function processXLSX(file){
 
 function parseCSVtoData(csv){
   function pr(line){const o=[];let c='',q=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'){q=!q;}else if(ch===','&&!q){o.push(c.trim());c='';}else{c+=ch;}}o.push(c.trim());return o;}
-  const rows=csv.replace(/
-/g,'').split('
-').map(pr);
+  const rows=csv.replace(/\r/g,'').split('\n').map(pr);
+
+
   let mc=2;
   for(const r of rows){const j=r.findIndex(c=>c&&c.toLowerCase().includes('janeiro'));if(j>=0){mc=j;break;}}
   const lc=mc-1,cols=Array.from({length:12},(_,i)=>mc+i);
