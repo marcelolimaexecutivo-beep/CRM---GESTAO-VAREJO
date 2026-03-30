@@ -65,11 +65,11 @@ body.light .login-card{
   box-shadow:0 24px 48px rgba(0,0,0,.12);
 }
 .login-logo{
-  width:48px;height:48px;border-radius:14px;
-  background:linear-gradient(135deg,var(--v1),var(--v5));
+  width:52px;height:52px;border-radius:16px;
+  background:linear-gradient(135deg,#00A1E0,#0070D2);
   display:flex;align-items:center;justify-content:center;
   font-size:22px;margin-bottom:28px;
-  box-shadow:0 8px 24px rgba(79,110,247,.35);
+  box-shadow:0 8px 24px rgba(0,161,224,.4);
 }
 .login-title{
   font-family:var(--fh);font-size:22px;font-weight:700;
@@ -140,7 +140,7 @@ body.light .login-divider::before,body.light .login-divider::after{background:va
 .topbar-left{display:flex;align-items:center;gap:12px}
 .top-logo{
   width:32px;height:32px;border-radius:8px;
-  background:linear-gradient(135deg,var(--v1),var(--v5));
+  background:linear-gradient(135deg,#00A1E0,#0070D2);
   display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;
 }
 .top-title{font-family:var(--fh);font-size:15px;font-weight:700;color:var(--txt);letter-spacing:-.3px}
@@ -360,7 +360,11 @@ canvas{width:100%!important}
 ══════════════════════════════ -->
 <div id="login-screen">
   <div class="login-card">
-    <div class="login-logo">📊</div>
+    <div class="login-logo">
+  <svg width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10.8 3.6C11.8-1.2 18.8-1.2 19.8 3.6C22.4 2.4 25.6 4.8 24.8 7.8C26.4 8.4 27.2 11.4 25.2 12.6C25.6 15.6 22.8 17.4 20.4 16.2C19.4 18.6 15.8 19.2 14 17.4C12.2 19.2 8.6 18.6 7.6 16.2C5.2 17.4 2.4 15.6 2.8 12.6C0.8 11.4 1.6 8.4 3.2 7.8C2.4 4.8 5.6 2.4 8.2 3.6C8.8 1.8 10.2 0.6 11.8 0.6L10.8 3.6Z" fill="white"/>
+  </svg>
+</div>
     <div class="login-title">Gestão de Produção</div>
     <div class="login-sub">Time Digital · Entre com suas credenciais de acesso.</div>
     <div class="field">
@@ -385,7 +389,11 @@ canvas{width:100%!important}
   <!-- TOPBAR -->
   <div class="topbar">
     <div class="topbar-left">
-      <div class="top-logo">📊</div>
+      <div class="top-logo">
+  <svg width="18" height="15" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10.8 3.6C11.8-1.2 18.8-1.2 19.8 3.6C22.4 2.4 25.6 4.8 24.8 7.8C26.4 8.4 27.2 11.4 25.2 12.6C25.6 15.6 22.8 17.4 20.4 16.2C19.4 18.6 15.8 19.2 14 17.4C12.2 19.2 8.6 18.6 7.6 16.2C5.2 17.4 2.4 15.6 2.8 12.6C0.8 11.4 1.6 8.4 3.2 7.8C2.4 4.8 5.6 2.4 8.2 3.6C8.8 1.8 10.2 0.6 11.8 0.6L10.8 3.6Z" fill="white"/>
+  </svg>
+</div>
       <div>
         <div class="top-title">Gestão de Produção <span id="top-year" style="color:var(--v1)">2026</span></div>
         <div class="top-sub" id="top-sub">Time Digital</div>
@@ -570,26 +578,26 @@ const Q_KEYS  = ['q1','q2','q3','q4'];
 
 const DB = {
   2026: {
-    team:{ realizado:[1284,1602,2247,null,null,null,null,null,null,null,null,null], meta:[1440,1320,1654,null,null,null,null,null,null,null,null,null] },
-    segments:{ SS:[710,830,1457,null,null,null,null,null,null,null,null,null], PME:[128,298,296,null,null,null,null,null,null,null,null,null], IND:[446,474,494,null,null,null,null,null,null,null,null,null] },
+    team:{ realizado:[1284,1602,2363,null,null,null,null,null,null,null,null,null], meta:[1440,1320,1654,null,null,null,null,null,null,null,null,null] },
+    segments:{ SS:[710,830,1519,null,null,null,null,null,null,null,null,null], PME:[128,298,296,null,null,null,null,null,null,null,null,null], IND:[446,474,548,null,null,null,null,null,null,null,null,null] },
     people:[
       { name:'Karollainny Lopes', initials:'KL', color:'#4f6ef7',
-        realizado:[428,447,653,null,null,null,null,null,null,null,null,null],
+        realizado:[428,447,694,null,null,null,null,null,null,null,null,null],
         meta:[347,317,397,null,null,null,null,null,null,null,null,null],
         corretores:[39,47,38,null,null,null,null,null,null,null,null,null],
         segs:{SS:[221,220,290,null,null,null,null,null,null,null,null,null],PME:[61,61,167,null,null,null,null,null,null,null,null,null],IND:[146,166,196,null,null,null,null,null,null,null,null,null]} },
       { name:'Amanda Sobral', initials:'AS', color:'#00d4a8',
-        realizado:[445,589,1054,null,null,null,null,null,null,null,null,null],
+        realizado:[445,589,1109,null,null,null,null,null,null,null,null,null],
         meta:[373,343,430,null,null,null,null,null,null,null,null,null],
         corretores:[35,46,31,null,null,null,null,null,null,null,null,null],
         segs:{SS:[245,361,846,null,null,null,null,null,null,null,null,null],PME:[0,0,0,null,null,null,null,null,null,null,null,null],IND:[200,228,208,null,null,null,null,null,null,null,null,null]} },
       { name:'Daniela Novais', initials:'DN', color:'#9b72f7',
-        realizado:[211,318,316,null,null,null,null,null,null,null,null,null],
+        realizado:[211,318,329,null,null,null,null,null,null,null,null,null],
         meta:[347,317,397,null,null,null,null,null,null,null,null,null],
         corretores:[46,55,47,null,null,null,null,null,null,null,null,null],
         segs:{SS:[155,151,137,null,null,null,null,null,null,null,null,null],PME:[0,115,129,null,null,null,null,null,null,null,null,null],IND:[56,52,50,null,null,null,null,null,null,null,null,null]} },
       { name:'Guilherme Musachi', initials:'GM', color:'#e8486a',
-        realizado:[200,248,224,null,null,null,null,null,null,null,null,null],
+        realizado:[200,248,231,null,null,null,null,null,null,null,null,null],
         meta:[373,343,430,null,null,null,null,null,null,null,null,null],
         corretores:[39,36,35,null,null,null,null,null,null,null,null,null],
         segs:{SS:[89,98,184,null,null,null,null,null,null,null,null,null],PME:[67,122,0,null,null,null,null,null,null,null,null,null],IND:[44,28,40,null,null,null,null,null,null,null,null,null]} }
@@ -1153,33 +1161,66 @@ function processXLSX(file){
 }
 
 function parseCSVtoData(csv){
-  function pr(line){const o=[];let c='',q=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'){q=!q;}else if(ch===','&&!q){o.push(c.trim());c='';}else{c+=ch;}}o.push(c.trim());return o;}
+  function pr(line){
+    const o=[];let c='',q=false;
+    for(let i=0;i<line.length;i++){
+      const ch=line[i];
+      if(ch==='"'){q=!q;}
+      else if(ch===','&&!q){o.push(c.trim());c='';}
+      else{c+=ch;}
+    }
+    o.push(c.trim());return o;
+  }
   const rows=csv.replace(/\r/g,'').split('\n').map(pr);
-
-
   let mc=2;
-  for(const r of rows){const j=r.findIndex(c=>c&&c.toLowerCase().includes('janeiro'));if(j>=0){mc=j;break;}}
-  const lc=mc-1,cols=Array.from({length:12},(_,i)=>mc+i);
-  function ns(row){if(!row)return Array(12).fill(null);return cols.map(i=>{const raw=(row[i]||'').trim();if(!raw||raw.startsWith('#'))return null;const v=parseFloat(raw.replace(',','.'));return isNaN(v)?null:v;});}
-  const firstMes=rows.findIndex(r=>r[lc]&&r[lc].trim().toUpperCase()==='MES'||r[lc]&&r[lc].trim().includes('MÊS'));
-  const teamReal=ns(rows[firstMes+1]),teamMeta=ns(rows[firstMes+2]);
-  const P_KEYS_LOCAL=['karollainny','amanda sobral','daniela novais','guilherme musachi'];
+  for(const r of rows){
+    const j=r.findIndex(c=>c&&c.toLowerCase().trim()==='janeiro');
+    if(j>=0){mc=j;break;}
+  }
+  const lc=mc-1;
+  const cols=Array.from({length:12},(_,i)=>mc+i);
+  function n(val){
+    if(!val)return null;
+    const s=String(val).trim();
+    if(!s||s==='-'||s.startsWith('#')||s==='nan')return null;
+    const v=parseFloat(s.replace('%','').replace(',','.'));
+    return isNaN(v)?null:v;
+  }
+  function ns(row){if(!row)return Array(12).fill(null);return cols.map(i=>n(row[i]));}
+  const firstMes=rows.findIndex(r=>{
+    const cell=(r[lc]||'').trim().toUpperCase().replace('Ê','E').replace('\xca','E');
+    return cell==='MES'||cell==='M\xcaS'||cell.startsWith('M') && cell.includes('S') && cell.length<=4;
+  });
+  if(firstMes<0)throw new Error('Header not found');
+  const teamReal=ns(rows[firstMes+1]);
+  const teamMeta=ns(rows[firstMes+2]);
+  const P_KEYS_LOCAL=['karollainny','amanda','daniela novais','guilherme'];
   const people=P_KEYS_LOCAL.map((key,i)=>{
     const matches=[];
-    for(let ri=0;ri<rows.length;ri++){const cell=(rows[ri][lc]||'').trim().toLowerCase();if(cell.includes(key))matches.push(ri);}
-    const ni=matches[matches.length-1];if(ni===undefined)return null;
+    for(let ri=0;ri<rows.length;ri++){
+      const cell=(rows[ri][lc]||'').trim().toLowerCase();
+      if(cell.includes(key)&&cell.length>4)matches.push(ri);
+    }
+    const ni=matches[matches.length-1];
+    if(ni===undefined)return null;
     const bl=rows.slice(ni,ni+35);
-    const f=lbl=>bl.find(r=>r[lc]&&r[lc].trim().toLowerCase()===lbl.toLowerCase());
-    const fu=lbl=>bl.find(r=>r[lc]&&r[lc].trim().toUpperCase().trim()===lbl.toUpperCase().trim());
-    const existing=DB[activeYear].people[i];
-    return{name:existing.name,initials:existing.initials,color:existing.color,
+    const f=lbl=>bl.find(r=>(r[lc]||'').trim().toLowerCase()===lbl.toLowerCase());
+    const fu=lbl=>bl.find(r=>(r[lc]||'').trim().toUpperCase().trimEnd()===lbl.toUpperCase().trimEnd());
+    const ex=DB[activeYear].people[i];
+    if(!ex)return null;
+    return{name:ex.name,initials:ex.initials,color:ex.color,
       realizado:ns(f('realizado')),meta:ns(f('meta')),corretores:ns(f('corretor')),
       segs:{SS:ns(fu('SS')),PME:ns(fu('PME')),IND:ns(fu('INDIVIDUAL'))}};
   }).filter(Boolean);
+  if(!people.length)throw new Error('No people');
   const seg={SS:Array(12).fill(null),PME:Array(12).fill(null),IND:Array(12).fill(null)};
-  for(let i=0;i<12;i++){['SS','PME','IND'].forEach(s=>{const vals=people.map(p=>p.segs[s][i]).filter(v=>v!==null);seg[s][i]=vals.length?vals.reduce((a,b)=>a+b,0):null;});}
+  for(let i=0;i<12;i++){['SS','PME','IND'].forEach(s=>{
+    const vals=people.map(p=>p.segs[s][i]).filter(v=>v!==null);
+    seg[s][i]=vals.length?vals.reduce((a,b)=>a+b,0):null;
+  });}
   return{team:{realizado:teamReal,meta:teamMeta},segments:seg,people};
 }
+
 
 window.addEventListener('DOMContentLoaded', initSupabase);
 </script>
