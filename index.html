@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- v20260331_002846 -->
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
@@ -1417,6 +1416,82 @@ function ndiInitFileInput() {
   });
 }
 
+
+
+// ══════════════════════════════════════════
+// PANEL SWITCHING
+// ══════════════════════════════════════════
+function switchPanel(panel) {
+  const prod = document.getElementById('producao-panel');
+  const ndi  = document.getElementById('ndi-panel');
+  if(prod) prod.style.display = panel === 'producao' ? 'block' : 'none';
+  if(ndi)  ndi.style.display  = panel === 'ndi'      ? 'block' : 'none';
+  const nb = document.getElementById('nav-producao');
+  const np = document.getElementById('nav-ndi');
+  if(nb) nb.classList.toggle('active', panel === 'producao');
+  if(np) np.classList.toggle('active', panel === 'ndi');
+  if(panel === 'ndi') {
+    ndiLoadHistory();
+    ndiInitFileInput();
+    applyNDIUserFilter();
+    ndiRenderAll();
+  }
+}
+
+function applyNDIUserFilter() {
+  if(!isAdmin && activePerson) {
+    ndiExecSearch = activePerson.name.toUpperCase();
+    document.querySelectorAll('.ndi-tab[data-tab="gerentes"]').forEach(t => t.style.display='none');
+    document.querySelectorAll('.ndi-tab[data-tab="ranking"]').forEach(t => t.style.display='none');
+  } else {
+    ndiExecSearch = '';
+  }
+}
+
+function ndiSetTab(el, tab) {
+  document.querySelectorAll('.ndi-tab').forEach(t => {
+    t.style.background = 'var(--surf)';
+    t.style.color = 'var(--muted2)';
+    t.style.borderColor = 'var(--b1)';
+  });
+  el.style.background = 'rgba(0,200,239,.12)';
+  el.style.color = 'var(--txt)';
+  el.style.borderColor = 'rgba(0,200,239,.4)';
+  ndiCurrentTab = tab;
+  ndiRenderAll();
+}
+
+let ndiFileInputInited = false;
+function ndiInitFileInput() {
+  if(ndiFileInputInited) return;
+  ndiFileInputInited = true;
+  const fi = document.getElementById('ndi-fileInput');
+  if(!fi) return;
+  fi.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    e.target.value = '';
+    ndiShowOverlay('Lendo planilha...');
+    try {
+      const buf = await file.arrayBuffer();
+      const wb = XLSX.read(buf, {type:'array', cellDates:false});
+      const ws = wb.Sheets['Base'];
+      if(!ws) throw new Error("Aba 'Base' não encontrada");
+      ndiShowOverlay('Calculando totais...');
+      await ndiTick();
+      const snap = ndiParseSnapshot(ws, file.name);
+      ndiAddSnapshot(snap);
+      ndiViewIdx = ndiHistory.length - 1;
+      ndiSaveHistory();
+      ndiHideOverlay();
+      ndiRenderAll();
+      ndiSetStatus('✓ ' + file.name + ' · ' + snap.date + ' · ' + snap.total.toLocaleString('pt-BR') + ' vidas', 'ok');
+    } catch(err) {
+      ndiHideOverlay();
+      ndiSetStatus('✗ Erro: ' + err.message, 'err');
+    }
+  });
+}
 
 </script>
 </body>
