@@ -624,7 +624,7 @@ canvas{width:100%!important}
           <label id="ndi-upload-btn" for="ndi-fileInput" title="Carregar planilha do dia" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:rgba(0,200,239,.1);border:1px solid rgba(0,200,239,.3);border-radius:8px;cursor:pointer;color:#00c8ef;transition:.2s">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           </label>
-          <input type="file" id="ndi-fileInput" accept=".xlsx,.xlsm,.xls" style="display:none">
+          <input type="file" id="ndi-fileInput" accept=".xlsx,.xlsm,.xls,.xlsm" style="display:none">
           <button onclick="ndiClearHistory()" title="Limpar histórico" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;border:1px solid var(--b1);background:none;color:var(--muted2);cursor:pointer;font-size:15px">🗑</button>
         </div>
       </div>
@@ -2615,9 +2615,9 @@ function ndiInitFileInput() {
     ndiShowOverlay('Lendo planilha...');
     try {
       const buf = await file.arrayBuffer();
-      const wb = XLSX.read(buf, {type:'array', cellDates:false});
-      const ws = wb.Sheets['Base'];
-      if(!ws) throw new Error("Aba 'Base' não encontrada");
+      const wb = XLSX.read(buf, {type:'array', cellDates:false, bookVBA:false});
+      const ws = wb.Sheets['Base'] || wb.Sheets[wb.SheetNames.find(n=>n==='Base')];
+      if(!ws) throw new Error("Aba 'Base' não encontrada. Abas disponíveis: " + wb.SheetNames.join(', '));
       ndiShowOverlay('Calculando totais...');
       await ndiTick();
       const snap = ndiParseSnapshot(ws, file.name);
