@@ -636,6 +636,16 @@ canvas{width:100%!important}
         <div class="ndi-tab" data-tab="corretoras" onclick="ndiSetTab(this,'corretoras')" style="padding:8px 18px;border-radius:8px;border:1px solid var(--b1);background:var(--surf);cursor:pointer;font-size:13px;font-weight:500;color:var(--muted2);transition:.15s">🏢 Corretoras</div>
         <div class="ndi-tab" data-tab="ranking" onclick="ndiSetTab(this,'ranking')" style="padding:8px 18px;border-radius:8px;border:1px solid var(--b1);background:var(--surf);cursor:pointer;font-size:13px;font-weight:500;color:var(--muted2);transition:.15s">🏆 Ranking</div>
       </div>
+      <!-- NDI UPLOAD PROMPT (shows when no data) -->
+      <div id="ndi-upload-prompt" style="background:var(--surf);border:1px dashed rgba(0,200,239,.4);border-radius:12px;padding:28px;text-align:center;margin-bottom:16px">
+        <div style="font-size:28px;margin-bottom:10px">📂</div>
+        <div style="font-family:var(--fh);font-size:14px;font-weight:600;color:var(--txt);margin-bottom:6px">Carregar planilha NDI</div>
+        <div style="font-size:12px;color:var(--muted2);margin-bottom:14px">Selecione o arquivo .xlsx com a aba <strong style="color:#00c8ef">"Base"</strong></div>
+        <label for="ndi-fileInput" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;background:rgba(0,200,239,.15);border:1px solid rgba(0,200,239,.4);border-radius:9px;cursor:pointer;color:#00c8ef;font-size:13px;font-weight:600;transition:.2s">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Selecionar arquivo .xlsx
+        </label>
+      </div>
       <!-- NDI CONTENT -->
       <div id="ndi-content" style="color:var(--txt)"></div>
     </div>
