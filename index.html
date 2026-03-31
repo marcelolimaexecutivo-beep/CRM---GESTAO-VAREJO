@@ -1626,14 +1626,17 @@ function thCls(sortObj, col) {
 function ndiRenderAll() {
   const vd = ndiGetViewData();
   ndiUpdateBrandSub(vd);
-  const tabs = {resumo: renderResumo, executivos: renderExecutivos,
-                corretoras: renderCorretoras, gerentes: renderGerentes,
-                performance: renderPerformance, ranking: renderRanking};
-  (tabs[currentTab] || renderResumo)(vd);
+  const tabs = {
+    resumo: ndiRenderResumo, executivos: ndiRenderExecutivos,
+    corretoras: ndiRenderCorretoras, gerentes: ndiRenderGerentes,
+    performance: ndiRenderPerformance, ranking: ndiRenderRanking
+  };
+  (tabs[ndiCurrentTab] || ndiRenderResumo)(vd);
 }
 
-function ndiUpdateBrandSub(vd) { const el=document.getElementById('ndi-brandSub'); if(!el)return;
+function ndiUpdateBrandSub(vd) {
   const el = document.getElementById('ndi-brandSub');
+  if (!el) return;
   if (!vd) { el.textContent = 'Nenhum arquivo carregado'; return; }
   const snap = vd.today;
   const excl = snap.execs.filter(e=>!ndiIsExcluded(e.name)).length;
@@ -2476,16 +2479,19 @@ function switchView(idx) {
 // ══════════════════════════════════════════════
 // UTILS
 // ══════════════════════════════════════════════
-function ndiShowOverlay(msg) { const o=document.getElementById('ndi-overlay'); if(o){o.classList.add('show');document.getElementById('ndi-ovMsg').textContent=msg||'Processando...';} return;
+function ndiShowOverlay(msg) {
+  const o=document.getElementById('ndi-overlay'); 
+  if(o){o.classList.add('show');const om=document.getElementById('ndi-ovMsg');if(om)om.textContent=msg||'Processando...';}
   document.getElementById('ndi-ovMsg').textContent = msg;
   document.getElementById('ndi-overlay').classList.add('on');
 }
-function ndiHideOverlay() { const o=document.getElementById('ndi-overlay'); if(o)o.classList.remove('show'); return; document.getElementById('ndi-overlay').classList.remove('on'); }
+function ndiHideOverlay() {
+  const o=document.getElementById('ndi-overlay'); if(o)o.classList.remove('show'); document.getElementById('ndi-overlay').classList.remove('on'); }
 function ndiSetStatus(msg, cls='') {
   const el = document.getElementById('ndi-statusMsg');
   el.textContent = msg; el.className = cls;
 }
-function ndiTick() { return new Promise(r=>setTimeout(r,0)); } function _ndiTick_old() { return new Promise(r=>setTimeout(r,30)); }
+function ndiTick() { return new Promise(r=>setTimeout(r,0)); } function _ndiTick_old_DISABLED() { return new Promise(r=>setTimeout(r,30)); }
 
 // ══════════════════════════════════════════════
 // THEME TOGGLE
