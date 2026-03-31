@@ -1405,11 +1405,11 @@ function ndiClearHistory() {
 
 // ══════════════════════════════════════════
 // NDI CORE MODULE
+let ndiFileInputInited = false;
 // ══════════════════════════════════════════
 // ══════════════════════════════════════════════
 // CONSTANTS
 // ══════════════════════════════════════════════
-NDI_STORAGE_KEY = 'ndi_vidas_history_v2';
  // ~2 months
 
 
@@ -2599,7 +2599,6 @@ function ndiSetTab(el, tab) {
   ndiRenderAll();
 }
 
-let ndiFileInputInited = false;
 function ndiInitFileInput() {
   if(ndiFileInputInited) return;
   ndiFileInputInited = true;
