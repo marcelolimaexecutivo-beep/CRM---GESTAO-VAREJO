@@ -1385,7 +1385,7 @@ function ndiLoadHistory() {
   } catch(e) { ndiHistory = []; }
 }
 function ndiSaveHistory() {
-  try { localStorage.setItem(NDI_STORAGE_KEY, JSON.stringify(history)); } catch(e) {}
+  try { localStorage.setItem(NDI_STORAGE_KEY, JSON.stringify(ndiHistory)); } catch(e) {}
 }
 function ndiClearHistory() {
   if (!confirm('Apagar todo o histórico salvo?')) return;
@@ -1433,11 +1433,11 @@ GERENTES_SENIOR.forEach(gs => gs.executivos.forEach(e => { EXEC_TO_GS[e.toUpperC
 function ndiLoadHistory() {
   try {
     const raw = localStorage.getItem(NDI_STORAGE_KEY);
-    if (raw) history = JSON.parse(raw);
+    if (raw) ndiHistory = JSON.parse(raw);
   } catch(e) { ndiHistory = []; }
 }
 function ndiSaveHistory() {
-  try { localStorage.setItem(NDI_STORAGE_KEY, JSON.stringify(history)); } catch(e) {}
+  try { localStorage.setItem(NDI_STORAGE_KEY, JSON.stringify(ndiHistory)); } catch(e) {}
 }
 function ndiClearHistory() {
   if (!confirm('Apagar todo o histórico salvo?')) return;
@@ -1602,7 +1602,7 @@ function findSnapNDaysAgo(snap, n) {
   const target = ts - n * 86400000;
   // find closest snapshot at or before target
   let best = null, bestDiff = Infinity;
-  for (const h of history) {
+  for (const h of ndiHistory) {
     const t = ndiParseDateStr(h.date);
     if (t <= ts && t !== ts) {
       const diff = Math.abs(t - target);
