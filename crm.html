@@ -1434,14 +1434,14 @@ function ndiLoadHistory() {
   try {
     const raw = localStorage.getItem(NDI_STORAGE_KEY);
     if (raw) history = JSON.parse(raw);
-  } catch(e) { history = []; }
+  } catch(e) { ndiHistory = []; }
 }
 function ndiSaveHistory() {
   try { localStorage.setItem(NDI_STORAGE_KEY, JSON.stringify(history)); } catch(e) {}
 }
 function ndiClearHistory() {
   if (!confirm('Apagar todo o histórico salvo?')) return;
-  history = [];
+  ndiHistory = [];
   ndiViewIdx = -1;
   localStorage.removeItem(NDI_STORAGE_KEY);
   ndiRenderAll();
@@ -1549,12 +1549,12 @@ function ndiAddSnapshot(snap) {
   } else {
     ndiHistory.push(snap);
     // Sort by date
-    history.sort((a,b) => parseDateStr(a.date) - parseDateStr(b.date));
-    if (ndiHistory.length > MAX_SNAPSHOTS) history = history.slice(-MAX_SNAPSHOTS);
+    ndiHistory.sort((a,b) => ndiParseDateStr(a.date) - ndiParseDateStr(b.date));
+    if (ndiHistory.length > MAX_SNAPSHOTS) ndiHistory = ndiHistory.slice(-MAX_SNAPSHOTS);
   }
 }
 
-function parseDateStr(s) {
+function ndiParseDateStr(s) {
   // "DD/MM/YYYY"
   const [d,m,y] = s.split('/');
   return new Date(+y, +m-1, +d).getTime();
@@ -1598,12 +1598,12 @@ function computeDelta(snapA, snapB) {
 // WEEKLY DELTA: compare snapshot with one ~7 days earlier
 // ══════════════════════════════════════════════
 function findSnapNDaysAgo(snap, n) {
-  const ts = parseDateStr(snap.date);
+  const ts = ndiParseDateStr(snap.date);
   const target = ts - n * 86400000;
   // find closest snapshot at or before target
   let best = null, bestDiff = Infinity;
   for (const h of history) {
-    const t = parseDateStr(h.date);
+    const t = ndiParseDateStr(h.date);
     if (t <= ts && t !== ts) {
       const diff = Math.abs(t - target);
       if (diff < bestDiff) { bestDiff = diff; best = h; }
@@ -1725,7 +1725,7 @@ function ndiRenderResumo(vd) {
 
 function historyStrip(vd) {
   if (ndiHistory.length === 0) return '';
-  const days = history.map((h, i) => {
+  const days = ndiHistory.map((h, i) => {
     const prev = i > 0 ? ndiHistory[i-1] : null;
     const delta = prev ? h.total - prev.total : null;
     const cls = i === (ndiViewIdx >= 0 ? ndiViewIdx : ndiHistory.length-1) ? 'hist-day active' : 'hist-day';
@@ -1756,8 +1756,8 @@ function buildEvolutionChart(vd) {
     const canvas = document.getElementById('evoChart');
     if (!canvas || ndiHistory.length < 2) return;
     if (ndiChartObj) { ndiChartObj.destroy(); ndiChartObj = null; }
-    const labels = history.map(h => h.date);
-    const totals = history.map(h => h.total);
+    const labels = ndiHistory.map(h => h.date);
+    const totals = ndiHistory.map(h => h.total);
     const gc = () => 'rgba(255,255,255,0.04)';
     ndiChartObj = new Chart(canvas, {
       type: 'line',
@@ -2294,7 +2294,7 @@ function ndiRenderPerformance(vd) {
   const execMd = monDelta  ? (monDelta.execDelta.find(e=>e.name===ndiPerfExec)?.delta ?? null) : null;
 
   // Evolution of this exec across snapshots
-  const execHistory = history.map(h => ({
+  const execHistory = ndiHistory.map(h => ({
     date: h.date,
     total: h.execs.find(e=>e.name===ndiPerfExec)?.total ?? 0
   }));
