@@ -1378,7 +1378,10 @@ let ndiChartObj = null;
 function ndiLoadHistory() {
   try {
     const raw = localStorage.getItem(NDI_STORAGE_KEY);
-    if (raw) ndiHistory = JSON.parse(raw);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      ndiHistory = Array.isArray(parsed) ? parsed : [];
+    }
   } catch(e) { ndiHistory = []; }
 }
 function ndiSaveHistory() {
